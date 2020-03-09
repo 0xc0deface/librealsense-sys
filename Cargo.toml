@@ -1,5 +1,5 @@
 [package]
-name = "librealsense-sys"
+name = "librealsense2-sys"
 version = "0.2.1"
 authors = ["Benjamin Hinchley <benjaminhinchley@gmail.com>"]
 description = "FFI Bindings to librealsense"
