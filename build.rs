@@ -6,19 +6,21 @@ use std::path::PathBuf;
 fn main() {
     // Tell cargo to tell rustc to link the system realsense
     // shared library.
-    println!("cargo:rustc-link-lib=realsense");
+    println!("cargo:rustc-link-lib=realsense2");
 
     // The bindgen::Builder is the main entry point
     // to bindgen, and lets you build up options for
     // the resulting bindings.
     let bindings = bindgen::Builder::default()
-        // Do not generate unstable Rust code that
-        // requires a nightly rustc and enabling
-        // unstable features.
-        .no_unstable_rust()
         // The input header we would like to generate
         // bindings for.
         .header("wrapper.h")
+        //.clang_args(&["-x", "c++", "-std=c++14"] )
+        //.opaque_type("std::*" )
+        //.opaque_type("size_type")
+        // Tell cargo to invalidate the built crate whenever any of the
+        // included header files changed.
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
         // Finish the builder and generate the bindings.
         .generate()
         // Unwrap the Result and panic on failure.
